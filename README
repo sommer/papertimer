@@ -1,28 +1,11 @@
 
-papertimer 0.0.1 -- Simple full-screen countdown timer
-Copyright (C) 2009 Christoph Sommer <mail@christoph-sommer.de>
+papertimer -- Simple full-screen countdown timer
+Copyright (C) 2009-2011 Christoph Sommer <mail@christoph-sommer.de>
 
 Uses python and Tkinter to display a simple full-screen countdown timer
 for session chairs and presentations. Run as follows:
 
 ./papertimer.py
 
-When running, papertimer is controlled using the keyboard:
-
-Spacebar
-	pauses and continues the countdown
-Escape
-	quits papertimer
-+ or Up
-	adds time (default: 1 minute)
-- or Down
-	subtracts time (default: 1 minute)
-Enter
-	sets time (default: 30 minutes)
-Number keys and "s" key
-	can be used to change the increment/decrement or the time to set
-	in minutes or (with "s" appended) in seconds. So, to add thirty
-	seconds to the speaker's time, you'd type "30s" and press "+".
-	Or, to re-set the countdown to 25 minutes, you'd type "25" and 
-	press Enter.
+Press <F1> or 'h' for help.
 
