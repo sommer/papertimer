@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 #
 # papertimer -- Simple full-screen countdown timer
@@ -33,15 +33,15 @@ Numbers: can be used to change the increment/decrement (append "s" for seconds)
 Enter: sets time (default: 30 minutes)
 """
 
-import Tkinter
-import tkMessageBox
+import tkinter
+import tkinter.messagebox
 import time
 import math
 
 defaultInterval = 20 * 60
 warnInterval = 5 * 60
 
-_VERSION = "1.0"
+_VERSION = "2.0"
 _BG = "blue"
 _BGOUT = "red"
 _FG = "white"
@@ -121,15 +121,15 @@ def draw_number(c, x, y, w, h, segmentwidth, number, fg):
         draw_colon(c, x, y, w, h, segmentwidth, fg)
     else:
         if number > 99: number = 99
-        digit1 = number / 10
-        digit2 = number % 10
+        digit1 = int(number / 10)
+        digit2 = int(number % 10)
         draw_digit(c, x, y, w, h, segmentwidth, str(digit1), fg)
         draw_digit(c, x + w + _DIGITSPACING, y, w, h, segmentwidth, str(digit2), fg)
 
 def draw_time(c, x, y, seconds, drawColon=True, warn=False):
     seconds = int(seconds)
-    minutes = seconds / 60
-    seconds = seconds % 60
+    minutes = int(seconds / 60)
+    seconds = int(seconds % 60)
     draw_number(c, x, y, _DIGITWIDTH, _DIGITHEIGHT, _SEGMENTWIDTH, minutes, fg=(_FG, _FGWARN)[warn])
     if drawColon: draw_number(c, x + 2 * _DIGITWIDTH + 2 * _DIGITSPACING, 0.4*_DIGITHEIGHT+y, 0.6*_DIGITWIDTH, 0.6*_DIGITHEIGHT, 0.6*_SEGMENTWIDTH, ":", fg=(_FG, _FGWARN)[warn])
     draw_number(c, x + 2 * _DIGITWIDTH + 3 * _DIGITSPACING + 0.6*_DIGITSPACING, 0.4*_DIGITHEIGHT+y, 0.6*_DIGITWIDTH, 0.6*_DIGITHEIGHT, 0.8*_SEGMENTWIDTH, seconds, fg=(_FG, _FGWARN)[warn])
@@ -218,7 +218,7 @@ def OnPressS(event):
     prefixBufferExpires = time.time() + 1
 
 def OnPressHelp(event):
-    tkMessageBox.showwarning("Help", _HELP)
+    tkinter.messagebox.showwarning("Help", _HELP)
 
 def addTime(seconds):
     global endTime, pausedAt
@@ -264,7 +264,7 @@ def draw(force = False):
 
     draw_parameters = (x, y, seconds, colon, warn, bgcolor)
     if draw_parameters != last_draw_parameters or force:
-        c.delete(Tkinter.ALL)
+        c.delete(tkinter.ALL)
         c.config(bg = bgcolor)
         draw_time(c, x, y, seconds=seconds, drawColon=colon, warn=warn)
         last_draw_parameters = draw_parameters
@@ -276,15 +276,15 @@ def tick():
 def main():
     global root, c
     
-    root = Tkinter.Tk()
+    root = tkinter.Tk()
     root.title("papertimer %s" % (_VERSION))
     w = root.winfo_screenwidth()
     h = root.winfo_screenheight()
     #root.overrideredirect(1)
     root.geometry("%dx%d+0+0" % (w, h))
     #root.wm_attributes('-fullscreen', 1)
-    c = Tkinter.Canvas(master=root, width=800, height=600, bg=_BG)
-    c.pack(fill=Tkinter.BOTH, expand=Tkinter.YES)
+    c = tkinter.Canvas(master=root, width=800, height=600, bg=_BG)
+    c.pack(fill=tkinter.BOTH, expand=tkinter.YES)
     #c.place(x=0, y=0)
     root.bind("<space>", OnPressSpace)
     root.bind("<Return>", OnPressEnter)
